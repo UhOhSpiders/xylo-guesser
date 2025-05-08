@@ -5,21 +5,19 @@ const Header = () => {
   let formattedDate = date.toDateString().split(" ");
   return (
     <header>
-      <div style={{ backgroundColor: "orange", padding: "0.5rem", display:"flex" }}>
+      <div style={{ backgroundColor: "orange", padding: "0.5rem", display:"flex", alignItems:"center",gap:"1rem" }}>
         {" "}
         <a href="https://github.com/UhOhSpiders/xylo-guesser">
           <img src={github_logo} style={{ width: "30px", paddingLeft:"1rem" }} />
         </a>
+        <h3 id="nav-bar-heading">Xylo Guesser</h3>
       </div>
       <div
         style={{
-          display: "flex",
-          padding: "0.5rem",
-          paddingLeft: "4rem",
-          paddingTop: "0.8rem",
+          display: "flex"
         }}
       >
-        <h1>Xylo Guesser</h1>
+        <h1 id="splash-heading">Xylo Guesser</h1>
         <h2>
           {formattedDate[1]} {formattedDate[2]}, {formattedDate[3]}
         </h2>
