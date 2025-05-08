@@ -3,10 +3,10 @@ import type { Tune } from "./types/Tune";
 
 type XylophoneProps = {
   tune: Tune;
-  hintIsPlaying: boolean
+  hintIsPlaying: boolean;
 };
 
-const Xylophone: React.FC<XylophoneProps>  = ({ tune, hintIsPlaying }) => {
+const Xylophone: React.FC<XylophoneProps> = ({ tune, hintIsPlaying }) => {
   let highestNote = Math.max(...tune.shuffledArray.map((o) => o.note));
 
   let xylophone = tune.shuffledArray.map((note, index) => {
@@ -20,7 +20,21 @@ const Xylophone: React.FC<XylophoneProps>  = ({ tune, hintIsPlaying }) => {
       />
     );
   });
-  return <div style={{ height: "20rem", paddingBottom:"3rem", paddingTop:"3rem" }}>{xylophone}</div>;
+  return (
+    <div
+      style={{
+        height: "20rem",
+        paddingBottom: "3rem",
+        paddingTop: "3rem",
+        display: "flex",
+        alignItems: "center",
+        justifyContent:"center",
+        gap: "0.5rem",
+      }}
+    >
+      {xylophone}
+    </div>
+  );
 };
 
 export default Xylophone;

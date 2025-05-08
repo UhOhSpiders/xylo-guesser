@@ -15,7 +15,8 @@ const GuessInput: React.FC<GuessInputProps> = ({
     const formElements = form.elements as typeof form.elements & {
       guess: { value: string };
     };
-    if (formElements.guess.value === tuneTitle) {
+    let input = formElements.guess.value.toLowerCase()
+    if (input === tuneTitle.toLowerCase()) {
       handleWin();
     } else {
       handleWrongGuess();

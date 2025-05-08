@@ -5,12 +5,13 @@ import Button from "./Button";
 import { bubbleSort } from "./utilities/BubbleSort";
 import GuessInput from "./GuessInput";
 import type { Tune } from "./types/Tune";
-import { DUMMY_TUNE } from "./constants";
+import { DUMMY_TUNE, NOTE_DURATION } from "./constants";
+import Header from "./Header";
 
 function App() {
   const [tune, setTune] = useState<Tune>(DUMMY_TUNE);
   const [gameState, setGameState] = useState("PLAYING");
-  const [hintIsPlaying, setHintIsPlaying] = useState(false)
+  const [hintIsPlaying, setHintIsPlaying] = useState(false);
 
   const handleHint = () => {
     if (tune.remainingClues > 0) {
@@ -19,7 +20,7 @@ function App() {
       tempTune.shuffledArray = singleBubbleSortPass;
       tempTune.remainingClues--;
       setTune(tempTune);
-      handlePlayHint()
+      handlePlayHint();
     } else {
       setGameState("LOSE");
     }
@@ -38,31 +39,36 @@ function App() {
   };
 
   const handlePlayHint = () => {
-    setHintIsPlaying(!hintIsPlaying)
+    setHintIsPlaying(!hintIsPlaying);
     setTimeout(() => {
-      setHintIsPlaying(false)
-    }, 3000);
-    
-  }
+      setHintIsPlaying(false);
+    }, tune.shuffledArray.length * NOTE_DURATION * 1000);
+  };
 
   if (gameState === "PLAYING") {
     return (
       <>
-      <div style={{display:"red"}}>
-        <h1>Xylo Guesser</h1>
-        <p>Guess the scrambled tune.</p>
-        <p>Click the hint button to gradually unscramble.</p>
-        <Xylophone tune={tune} hintIsPlaying={hintIsPlaying}/>
-        <div style={{display:"flex", justifyContent:"center"}}>
-        {hintIsPlaying ? <p id="deactivated-button">playing...</p> : <Button text={"play hint"} onClick={handlePlayHint} />}
-        <Button text={"hint"} onClick={handleHint} />
-        </div>
-        <p>Remaining clues: {tune.remainingClues}</p>
-        <GuessInput
-          tuneTitle={tune.title}
-          handleWin={handleWin}
-          handleWrongGuess={handleWrongGuess}
-        />
+        <Header />
+        <div>
+          <p>Guess the scrambled tune.</p>
+          <p>Click the hint button to gradually unscramble.</p>
+          <Xylophone tune={tune} hintIsPlaying={hintIsPlaying} />
+          <div
+            style={{ display: "flex", justifyContent: "center", gap: "0.5rem" }}
+          >
+            {hintIsPlaying ? (
+              <p id="deactivated-button">playing...</p>
+            ) : (
+              <Button text={"play hint"} onClick={handlePlayHint} />
+            )}
+            <Button text={"hint"} onClick={handleHint} />
+          </div>
+          <p>Remaining clues: {tune.remainingClues}</p>
+          <GuessInput
+            tuneTitle={tune.title}
+            handleWin={handleWin}
+            handleWrongGuess={handleWrongGuess}
+          />
         </div>
       </>
     );
