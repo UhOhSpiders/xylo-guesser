@@ -1,4 +1,3 @@
-import React from "react";
 import github_logo from "../src/github_logo.svg"
 
 const Header = () => {
