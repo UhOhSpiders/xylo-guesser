@@ -1,3 +1,5 @@
+export const NOTE_DURATION = 0.2
+
 export const DUMMY_TUNE = {
   title: "mary had a little lamb",
   shuffledArray: [

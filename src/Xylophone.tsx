@@ -3,9 +3,10 @@ import type { Tune } from "./types/Tune";
 
 type XylophoneProps = {
   tune: Tune;
+  hintIsPlaying: boolean
 };
 
-const Xylophone: React.FC<XylophoneProps>  = ({ tune }) => {
+const Xylophone: React.FC<XylophoneProps>  = ({ tune, hintIsPlaying }) => {
   let highestNote = Math.max(...tune.shuffledArray.map((o) => o.note));
 
   let xylophone = tune.shuffledArray.map((note, index) => {
@@ -14,6 +15,8 @@ const Xylophone: React.FC<XylophoneProps>  = ({ tune }) => {
         key={index}
         note={note.note}
         height={note.note / highestNote}
+        index={index}
+        hintIsPlaying={hintIsPlaying}
       />
     );
   });

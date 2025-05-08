@@ -10,6 +10,7 @@ import { DUMMY_TUNE } from "./constants";
 function App() {
   const [tune, setTune] = useState<Tune>(DUMMY_TUNE);
   const [gameState, setGameState] = useState("PLAYING");
+  const [hintIsPlaying, setHintIsPlaying] = useState(false)
 
   const handleHint = () => {
     if (tune.remainingClues > 0) {
@@ -18,6 +19,7 @@ function App() {
       tempTune.shuffledArray = singleBubbleSortPass;
       tempTune.remainingClues--;
       setTune(tempTune);
+      handlePlayHint()
     } else {
       setGameState("LOSE");
     }
@@ -35,6 +37,14 @@ function App() {
     } else setGameState("LOSE");
   };
 
+  const handlePlayHint = () => {
+    setHintIsPlaying(!hintIsPlaying)
+    setTimeout(() => {
+      setHintIsPlaying(false)
+    }, 3000);
+    
+  }
+
   if (gameState === "PLAYING") {
     return (
       <>
@@ -42,9 +52,11 @@ function App() {
         <h1>Xylo Guesser</h1>
         <p>Guess the scrambled tune.</p>
         <p>Click the hint button to gradually unscramble.</p>
-        <Xylophone tune={tune} />
-        {/* <Button text={">"} onClick={handleHint} /> */}
+        <Xylophone tune={tune} hintIsPlaying={hintIsPlaying}/>
+        <div style={{display:"flex", justifyContent:"center"}}>
+        {hintIsPlaying ? <p id="deactivated-button">playing...</p> : <Button text={"play hint"} onClick={handlePlayHint} />}
         <Button text={"hint"} onClick={handleHint} />
+        </div>
         <p>Remaining clues: {tune.remainingClues}</p>
         <GuessInput
           tuneTitle={tune.title}
