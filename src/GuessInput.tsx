@@ -1,20 +1,33 @@
-import React from 'react'
+type GuessInputProps = {
+  tuneTitle: string;
+  handleWin: Function;
+  handleWrongGuess: Function;
+};
 
-const GuessInput = ({tuneTitle, handleWin, handleWrongGuess}) => {
-    function check(formInput: string){
-        if(formInput.get("guess") === tuneTitle){
-            handleWin()
-        }else{
-            handleWrongGuess()
-        }
+const GuessInput: React.FC<GuessInputProps> = ({
+  tuneTitle,
+  handleWin,
+  handleWrongGuess,
+}) => {
+  function check(event: React.SyntheticEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const form = event.currentTarget;
+    const formElements = form.elements as typeof form.elements & {
+      guess: { value: string };
+    };
+    if (formElements.guess.value === tuneTitle) {
+      handleWin();
+    } else {
+      handleWrongGuess();
     }
+  }
 
   return (
-    <form action={check}>
-    <input name="guess" />
-    <button type="submit">Guess</button>
-</form>
-  )
-}
+    <form onSubmit={check}>
+      <input id="guess" />
+      <button type="submit">Guess</button>
+    </form>
+  );
+};
 
-export default GuessInput
+export default GuessInput;

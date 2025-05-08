@@ -1,5 +1,4 @@
 export function bubbleSort(scrambled: { note: number, index: number }[], passes?: number): [{ note: number, index: number }[], number]  {
-    // if (!scrambled) return undefined
     let i, j, temp;
     let swapped;
     swapped = false;

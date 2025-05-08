@@ -1,8 +1,11 @@
-import React from "react";
-import { playTune } from "./utilities/playTune";
 import XyloNoteBlock from "./XyloNoteBlock";
+import type { Tune } from "./types/Tune";
 
-const Xylophone = ({ tune }) => {
+type XylophoneProps = {
+  tune: Tune;
+};
+
+const Xylophone: React.FC<XylophoneProps>  = ({ tune }) => {
   let highestNote = Math.max(...tune.shuffledArray.map((o) => o.note));
 
   let xylophone = tune.shuffledArray.map((note, index) => {
@@ -14,7 +17,7 @@ const Xylophone = ({ tune }) => {
       />
     );
   });
-  return <div style={{ height: "20rem", padding: "2rem" }}>{xylophone}</div>;
+  return <div style={{ height: "20rem", paddingBottom:"3rem", paddingTop:"3rem" }}>{xylophone}</div>;
 };
 
 export default Xylophone;

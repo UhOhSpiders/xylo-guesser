@@ -13,7 +13,7 @@ function App() {
 
   const handleHint = () => {
     if (tune.remainingClues > 0) {
-      let tempTune = {...tune};
+      let tempTune = { ...tune };
       let [singleBubbleSortPass] = bubbleSort(tempTune.shuffledArray, 1);
       tempTune.shuffledArray = singleBubbleSortPass;
       tempTune.remainingClues--;
@@ -38,17 +38,20 @@ function App() {
   if (gameState === "PLAYING") {
     return (
       <>
-        <h1>xylo guesser</h1>
+      <div style={{display:"red"}}>
+        <h1>Xylo Guesser</h1>
         <p>Guess the scrambled tune.</p>
         <p>Click the hint button to gradually unscramble.</p>
         <Xylophone tune={tune} />
-        <Button text={"hint"} color={"A0C35A"} onClick={handleHint} />
+        {/* <Button text={">"} onClick={handleHint} /> */}
+        <Button text={"hint"} onClick={handleHint} />
         <p>Remaining clues: {tune.remainingClues}</p>
         <GuessInput
           tuneTitle={tune.title}
           handleWin={handleWin}
           handleWrongGuess={handleWrongGuess}
         />
+        </div>
       </>
     );
   } else if (gameState === "WIN") {
