@@ -6,7 +6,7 @@ const XyloNoteBlock = ({ note, height }) => {
     console.log(height)
   const playNote = (midiNote) => {
     let now = Tone.now();
-    let frequency = Tone.Frequency(midiNote, "midi");
+    let frequency: Tone.FrequencyClass<number> = Tone.Frequency(midiNote, "midi");
     synth.triggerAttack(frequency, now);
     synth.triggerRelease(frequency, now + 0.2);
   };

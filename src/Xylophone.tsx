@@ -14,7 +14,7 @@ const Xylophone = ({ tune }) => {
       />
     );
   });
-  return <div style={{ height: "20rem", padding: "10px" }}>{xylophone}</div>;
+  return <div style={{ height: "20rem", padding: "2rem" }}>{xylophone}</div>;
 };
 
 export default Xylophone;

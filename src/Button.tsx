@@ -1,8 +1,8 @@
 import React from 'react'
 
-const Button = ({text, onClick}) => {
+const Button = ({text, onClick, color}) => {
   return (
-    <button onClick={onClick}>{text}</button>
+    <button style={{outline:"1px solid", backgroundColor:"transparent", borderRadius:"2rem"}}onClick={onClick}>{text}</button>
   )
 }
 

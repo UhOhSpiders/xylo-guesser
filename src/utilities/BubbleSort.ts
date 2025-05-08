@@ -1,12 +1,13 @@
-export function bubbleSort(scrambled: { note: number, index: number }[], passes?: number): [{ note: number, index: number }[], number] {
+export function bubbleSort(scrambled: { note: number, index: number }[], passes?: number): [{ note: number, index: number }[], number]  {
+    // if (!scrambled) return undefined
     let i, j, temp;
     let swapped;
     swapped = false;
     let sorted = [...scrambled];
-    let sortPasses = passes ? passes : scrambled.length-1
+    let sortPasses = passes ? passes : scrambled.length - 1
 
     for (i = 0; i < sortPasses; i++) {
-        swapped = false; 
+        swapped = false;
         for (j = 0; j < sorted.length - 1; j++) {
             if (sorted[j].index > sorted[j + 1].index) {
                 temp = sorted[j];
@@ -18,5 +19,5 @@ export function bubbleSort(scrambled: { note: number, index: number }[], passes?
         if (swapped == false) break;
     }
 
-    return [sorted, i]; 
+    return [sorted, i];
 }
