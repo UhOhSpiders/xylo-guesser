@@ -17,7 +17,7 @@ const XyloNoteBlock: React.FC<XyloNoteBlockProps> = ({ note, height }) => {
 
   return (
     <button
-      style={{ height: `${Math.pow(height, 10) * 100}%` }}
+      style={{ height: `${Math.pow(height, 10) * 100}%`, color:"#ba81c5" }}
       onMouseEnter={() => playNote(note)}
     >
       -
