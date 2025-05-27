@@ -1,4 +1,6 @@
-export function bubbleSort(scrambled: { note: number, index: number }[], passes?: number): [{ note: number, index: number }[], number]  {
+import type { Note } from "../types/Note";
+
+export function bubbleSort(scrambled: Note[], passes?: number): [Note[], number]  {
     let i, j, temp;
     let swapped;
     swapped = false;

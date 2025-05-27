@@ -1,20 +1,22 @@
 import { useEffect, useState } from "react";
 import { synth } from "./utilities/initToneJS";
 import * as Tone from "tone";
-import { NOTE_DURATION } from "./constants";
+import type { Note } from "./types/Note";
 
 type XyloNoteBlockProps = {
-  note: number;
+  note: Note;
   height: number;
   index: number;
-  hintIsPlaying: boolean;
+  tuneIsPlaying: boolean;
+  color: string;
 };
 
 const XyloNoteBlock: React.FC<XyloNoteBlockProps> = ({
   note,
   height,
   index,
-  hintIsPlaying,
+  tuneIsPlaying: hintIsPlaying,
+  color
 }) => {
   const [noteIsPlaying, setNoteIsPlaying] = useState(false);
   useEffect(() => {
@@ -25,19 +27,20 @@ const XyloNoteBlock: React.FC<XyloNoteBlockProps> = ({
 
   synth;
 
-  const playNote = (midiNote: number, delay?: number) => {
+  const playNote = (midiNote: Note, delay?: number) => {
     let now = Tone.now();
-    let frequency = Tone.Frequency(midiNote, "midi").toFrequency();
+    let frequency = Tone.Frequency(midiNote.pitch, "midi").toFrequency();
     let startTime = delay ? delay + now : now;
-
+    const subdivision = Tone.Time(midiNote.duration);
+    const noteDuration =  subdivision.toSeconds();
     synth.triggerAttack(frequency, startTime);
-    synth.triggerRelease(frequency, startTime + NOTE_DURATION);
+    synth.triggerRelease(frequency, startTime + noteDuration);
     Tone.Draw.schedule(function () {
       setNoteIsPlaying(true);
     }, startTime);
     Tone.Draw.schedule(function () {
       setNoteIsPlaying(false);
-    }, startTime + NOTE_DURATION);
+    }, startTime + noteDuration);
   };
 
   if (noteIsPlaying) {
@@ -61,8 +64,8 @@ const XyloNoteBlock: React.FC<XyloNoteBlockProps> = ({
         style={{
           height: `${Math.pow(height, 10) * 100}%`,
           flexShrink: 1,
-          color: "#ba81c5",
-          backgroundColor: "#ba81c5",
+          color: color,
+          backgroundColor: color,
         }}
         onMouseEnter={() => playNote(note)}
         onClick={() => playNote(note)}

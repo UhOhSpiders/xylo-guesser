@@ -1,6 +1,10 @@
+import type { Note } from "./Note";
+
 export type Tune = {
     title: string;
-    shuffledArray: { note: number, index: number }[];
-    sortedArray: { note: number, index: number }[];
+    puzzleNumber: number;
+    shuffledArray: Note[];
+    sortedArray: Note[];
     remainingClues: number;
+    totalClues: number;
   };
