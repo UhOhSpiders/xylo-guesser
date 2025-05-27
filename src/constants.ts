@@ -1,4 +1,3 @@
-import type { Note } from "./types/Note";
 import type { Tune } from "./types/Tune";
 
 export const NOTE_DURATION = 0.2

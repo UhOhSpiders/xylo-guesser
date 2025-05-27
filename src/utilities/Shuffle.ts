@@ -1,10 +1,17 @@
-export function shuffle(melody: number[]): { note: number, index: number }[] {
-    let pairedMelody = melody.map((note, index) => ({ note, index }));
+import type { Note } from "../types/Note";
 
-    for (let i = pairedMelody.length - 1; i > 0; i--) {
+export function shuffle(melody: { pitch: number, duration: string }[]): Note[] {
+    // Add index to each note
+    const indexedMelody = melody.map((note, index) => ({
+        ...note,
+        index,
+    }));
+
+    // Shuffle the array using Fisher-Yates
+    for (let i = indexedMelody.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
-        [pairedMelody[i], pairedMelody[j]] = [pairedMelody[j], pairedMelody[i]];
+        [indexedMelody[i], indexedMelody[j]] = [indexedMelody[j], indexedMelody[i]];
     }
 
-    return pairedMelody;
+    return indexedMelody;
 }
